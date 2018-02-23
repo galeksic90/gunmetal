@@ -73,12 +73,12 @@ gulp.task('serve:reload', function(cb) {
 gulp.task('serve:watch', function () {
     var srcDir = path.join(gulp.config.projectDir, gulp.config.roots.src) + path.sep;
 
-    gulp.watch([srcDir + gulp.config.srcRoots.imgs + '/**/*'], gulp.series(['layouts:shopify', 'images']));
-    gulp.watch([srcDir + gulp.config.srcRoots.scripts + '/**/*.js'], gulp.series(['layouts:shopify', 'scripts']));
-    gulp.watch([srcDir + gulp.config.srcRoots.scss + '/**/*.scss'], gulp.series(['layouts:shopify', 'styles']));
-    gulp.watch([srcDir + gulp.config.srcRoots.layouts + '/**/*.jade', srcDir + gulp.config.srcRoots.layouts + '/**/*.pug'], gulp.series(['rebuild', 'serve:reload']));
-    gulp.watch([srcDir + gulp.config.srcRoots.content + '/**/*.md'], gulp.series(['rebuild', 'serve:reload']));
-    gulp.watch([srcDir + gulp.config.srcRoots.static + '/**/*'], gulp.series(['build:static', 'serve:reload']));
+    gulp.watch([srcDir + gulp.config.srcRoots.imgs + '/**/*'], gulp.series('images', 'layouts:shopify', 'serve:reload'));
+    gulp.watch([srcDir + gulp.config.srcRoots.scripts + '/**/*.js'], gulp.series('scripts', 'layouts:shopify', 'serve:reload'));
+    gulp.watch([srcDir + gulp.config.srcRoots.scss + '/**/*.scss'], gulp.series('styles', 'layouts:shopify', 'serve:reload'));
+    gulp.watch([srcDir + gulp.config.srcRoots.layouts + '/**/*.jade', srcDir + gulp.config.srcRoots.layouts + '/**/*.pug'], gulp.series('rebuild', 'serve:reload'));
+    gulp.watch([srcDir + gulp.config.srcRoots.content + '/**/*.md'], gulp.series('rebuild', 'serve:reload'));
+    gulp.watch([srcDir + gulp.config.srcRoots.static + '/**/*'], gulp.series('build:static', 'serve:reload'));
 });
 
 gulp.task('serve', gulp.parallel('serve:watch', 'serve:' + gulp.config.serve.mode));

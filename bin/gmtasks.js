@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-process.stdout.write("gunmetal v1.2.1\r");
+process.stdout.write("gunmetal v1.2.2\r");
 process.env.GULP_PROJECTS_DIR = process.cwd();
 process.chdir(require('gunmetal').dirname);
 require('gulp-cli')();

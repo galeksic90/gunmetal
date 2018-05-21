@@ -23,9 +23,11 @@ if (gulp.config.isLoaded) {
 
     gulp.task('rebuild:full', gulp.series('build', 'content', 'layouts:copy', 'styles' , 'images', 'scripts' , 'layouts'));
 
+    gulp.task('rebuild:min', gulp.series('build', 'content', 'layouts:copy', 'styles' , 'images:min', 'scripts' , 'layouts'));
+
     gulp.task('rebuild', gulp.series('build:static', 'content', 'layouts:copy', 'styles' , 'images', 'scripts' , 'layouts'));
 
-    gulp.task('dist', gulp.series('rebuild:full', 'dist:clean', 'dist:copy', 'dist:delete', 'build:sitemap', 'dist:configs'));
+    gulp.task('dist', gulp.series('rebuild:min', 'dist:clean', 'dist:copy', 'dist:delete', 'build:sitemap', 'dist:configs'));
 
     gulp.task('deploy', gulp.series('dist', 'git:init-dist', 'git:push'));
     gulp.task('deploy:patch', gulp.series('dist', 'tag:patch', 'git:init-dist', 'git:push'));

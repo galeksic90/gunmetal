@@ -55,4 +55,4 @@ gulp.task('images:base64', function() {
 
 
 gulp.task('images', gulp.series('images:copy', 'images:retina'));
-gulp.task('images:min', gulp.series('images:copy', 'images:compress', 'images:retina', 'images:base64'));
+gulp.task('images:min', gulp.series('images:copy', 'images:retina', 'images:compress', 'images:base64'));
